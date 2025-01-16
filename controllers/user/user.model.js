@@ -4,11 +4,12 @@ const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema(
   {
+    driverId: { type: String, required: true },
     displayName: { type: String },
     firstName: { type: String, required: true, lowercase: true },
-    middleName: { type: String, required: true, lowercase: true },
+    middleName: { type: String, lowercase: true },
     lastName: { type: String, required: true, lowercase: true },
-    userName: { type: String, required: true, lowercase: true, unique: true },
+    userName: { type: String, lowercase: true, unique: true },
     email: {
       type: String,
       lowercase: true,
@@ -28,7 +29,8 @@ const UserSchema = new mongoose.Schema(
     postCode: { type: String, required: true },
     dob: { type: String, required: true },
     phoneNo: { type: String, required: true },
-    addPhoneNo: { type: String, required: true }
+    addPhoneNo: { type: String, required: true },
+    isActive: { type: Boolean, require: true, default: false }
   },
   { timestamps: true }
 );
@@ -40,7 +42,7 @@ const UserSchema = new mongoose.Schema(
 // On every save update the display name
 UserSchema.pre("save", function (next) {
   this.displayName = `${this.firstName} ${this.middleName} ${this.lastName}`;
-  this.userName = `${this.firstName}+${this.phoneNo.slice(-3)}`
+  this.userName = `${this.firstName}${this.phoneNo.slice(-4)}`
   next();
 });
 

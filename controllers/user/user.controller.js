@@ -23,14 +23,18 @@ const WHITELIST_LOGGEDIN_ATTRIBUTES = [
 ]
 
 const WHITELIST_REQUEST_ATTRIBUTES = [
+  'driverId',
   'firstName',
+  'middleName',
   'lastName',
   'email',
   'password',
   'address',
   'postCode',
   'dob',
-  'phoneNo'
+  'phoneNo',
+  'addPhoneNo',
+  'isActive'
 ];
 
 const UserController = {
@@ -38,7 +42,7 @@ const UserController = {
   /**
    * Creates a new user
    */
-  create: async (req, res, next) => {
+  register: async (req, res, next) => {
     try {
       const newUser = utils.sanitizeObject(req.body, WHITELIST_REQUEST_ATTRIBUTES);
       let user = await User.create(newUser);
