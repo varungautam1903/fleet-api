@@ -23,5 +23,6 @@ router.patch("/admin/:id",auth.protect, auth.admin, adminController.update);
 // UserInfo Route
 // router.get("/userinfo", auth.protect, userInfoController.index);
 router.post("/userinfo",auth.protect, auth.admin, userInfoController.create);
+router.get("/userinfo/getbyid/:id",auth.protect, auth.admin, userInfoController.getUserInfoById);
 
 module.exports = router;

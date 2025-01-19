@@ -13,13 +13,15 @@ const WHITELIST_ATTRIBUTES = [
 
 const WHITELIST_LOGGEDIN_ATTRIBUTES = [
   'firstName',
+  'middleName',
   'lastName',
   'displayName',
   'email',
   'address',
   'postCode',
   'dob',
-  'phoneNo'
+  'phoneNo',
+  'addPhoneNo'
 ]
 
 const WHITELIST_REQUEST_ATTRIBUTES = [

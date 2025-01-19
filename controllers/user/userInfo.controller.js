@@ -10,7 +10,8 @@ const WHITELIST_ATTRIBUTES = [
   'sortCode',
   'passportNo',
   'licenceNo',
-  'nINo'
+  'nINo',
+  '_user'
 ];
 
 const WHITELIST_REQUEST_ATTRIBUTES = [
@@ -23,7 +24,7 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
   'nINo'
 ];
 
-const UserAdminController = {
+const UserInfoAdminController = {
   /**
    * Gets a list of items
    */
@@ -84,7 +85,7 @@ const UserAdminController = {
   create: async (req, res, next) => {
     try {
       const newUserInfo = utils.sanitizeObject(req.body, WHITELIST_REQUEST_ATTRIBUTES);
-      let userInfo = await UserInfo.create(newUserInfo);
+      const userInfo = await UserInfo.create(newUserInfo);
       utils.respondWithResult(res)({ message: 'Created Successfully' });
     } catch (err) {
       utils.handleError(next)(err);
@@ -94,21 +95,20 @@ const UserAdminController = {
   /**
    * Returns the User By Id
    */
-  // getUserById: async (req, res, next) => {
-  //   try {
-  //     const user = await User.findById({ _id: req.params.id });
-
-  //     if (user) {
-  //       const response = utils.sanitizeObject(user, WHITELIST_ATTRIBUTES);
-  //       utils.respondWithResult(res)(response);
-  //     } else {
-  //       utils.handleEntityNotFound(res);
-  //     }
-  //   } catch (err) {
-  //     utils.handleError(next)(err);
-  //   }
-  // },
+  getUserInfoById: async (req, res, next) => {
+    try {
+      const userInfo = await UserInfo.findOne({ _user: req.params.id });
+      if (userInfo) {
+        const response = utils.sanitizeObject(userInfo, WHITELIST_ATTRIBUTES);
+        utils.respondWithResult(res)(response);
+      } else {
+        utils.handleEntityNotFound(res);
+      }
+    } catch (err) {
+      utils.handleError(next)(err);
+    }
+  },
 
 };
 
-module.exports = UserAdminController;
+module.exports = UserInfoAdminController;

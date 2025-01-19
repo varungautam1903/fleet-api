@@ -1,10 +1,12 @@
 const _ = require("lodash");
 const utils = require("../../components/utils");
 const User = require("./user.model");
+const UserInfo = require("./userInfo.model");
 
 const WHITELIST_ATTRIBUTES = [
   "_id",
   "firstName",
+  "middleName",
   "lastName",
   "displayName",
   "email",
@@ -25,6 +27,7 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
   'address',
   'postCode',
   'dob',
+  "isActive",
   'phoneNo',
   'addPhoneNo'
 ];
@@ -103,9 +106,11 @@ const UserAdminController = {
   getUserById: async (req, res, next) => {
     try {
       const user = await User.findById({ _id: req.params.id });
-
+      const detail = await UserInfo.findOne({ _user: user._id });
+      const isValid = detail ? true: false; 
       if (user) {
         const response = utils.sanitizeObject(user, WHITELIST_ATTRIBUTES);
+        response.isValid = isValid;
         utils.respondWithResult(res)(response);
       } else {
         utils.handleEntityNotFound(res);

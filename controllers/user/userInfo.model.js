@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
-const bcrypt = require("bcryptjs");
 
 const UserInfoSchema = new mongoose.Schema(
   {
@@ -14,8 +12,7 @@ const UserInfoSchema = new mongoose.Schema(
     sortCode: { type: String, required: true },
     passportNo: { type: String, required: true, lowercase: true },
     licenceNo: { type: String, lowercase: true },
-    nINo: { type: String, required: true, lowercase: true },
-    salt: String,
+    nINo: { type: String, required: true, lowercase: true }
   },
   { timestamps: true }
 );
