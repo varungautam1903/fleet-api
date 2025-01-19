@@ -1,4 +1,6 @@
 const userRoutes = require('../controllers/user');
+const vehcileRoutes = require('../controllers/vehicle');
+const depotRoutes = require('../controllers/depot');
 const auth = require('../components/middleware/authMiddleware');
 
 /**
@@ -10,7 +12,8 @@ module.exports = (app) => {
     * Routes should be defined in module folder
     */
     app.use('/api/user', userRoutes);
-    // app.use('/api/vehicle', userRoutes);
+    app.use('/api/vehicle', vehcileRoutes);
+    app.use('/api/depot', depotRoutes);
 
     /**
    * Validation errors

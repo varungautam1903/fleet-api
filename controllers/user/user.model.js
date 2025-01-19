@@ -19,7 +19,6 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     password: { type: String, required: true },
-    salt: String,
     role: {
       type: String,
       enum: ["user", "admin", "manager", "accountant"],
