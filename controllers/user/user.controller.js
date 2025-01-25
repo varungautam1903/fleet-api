@@ -92,8 +92,8 @@ const UserController = {
       const select = WHITELIST_ATTRIBUTES.join(' ');
       const query = {};
 
-      if (req.query.dn) {
-        query.displayName = { $regex: `${req.query.dn}.*`, $options: 'i' };
+      if (req.query.displayName) {
+        query.displayName = { $regex: `${req.query.displayName}.*`, $options: 'i' };
       }
 
       // TODO: Build query based on params
