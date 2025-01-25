@@ -1,6 +1,7 @@
 const userRoutes = require('../controllers/user');
 const vehcileRoutes = require('../controllers/vehicle');
 const depotRoutes = require('../controllers/depot');
+const historyRoutes = require('../controllers/history');
 const auth = require('../components/middleware/authMiddleware');
 
 /**
@@ -14,6 +15,7 @@ module.exports = (app) => {
     app.use('/api/user', userRoutes);
     app.use('/api/vehicle', vehcileRoutes);
     app.use('/api/depot', depotRoutes);
+    app.use('/api/history', historyRoutes);
 
     /**
    * Validation errors

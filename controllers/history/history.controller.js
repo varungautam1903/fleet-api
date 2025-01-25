@@ -4,8 +4,12 @@ const History = require('./history.model');
 
 const WHITELIST_ATTRIBUTES = [
   '_id',
-  'name',
-  'address',
+  '_user',
+  '_depot',
+  '_vehicle',
+  'franchiseId',
+  'routeNo',
+  'stops',
   'postCode'
 ];
 
@@ -13,6 +17,19 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
   'name',
   'address',
   'postCode'
+];
+
+const WHITELIST_USER_ATTRIBUTES = [
+  'displayName',
+  'phoneNo'
+];
+
+const WHITELIST_DEPOT_ATTRIBUTES = [
+  'name',
+];
+
+const WHITELIST_VEHICLE_ATTRIBUTES = [
+  'reg',
 ];
 
 const HistoryController = {
@@ -26,14 +43,24 @@ const HistoryController = {
       const skip = Number(req.query.skip) || 0;
       const sort = req.query.sort || '-createdAt';
       const select = WHITELIST_ATTRIBUTES.join(' ');
-
       const query = {};
+
+      const populateQuery = [
+        { path: '_user', select: WHITELIST_USER_ATTRIBUTES },
+        { path: '_depot', select: WHITELIST_DEPOT_ATTRIBUTES },
+        { path: '_vehicle', select: WHITELIST_VEHICLE_ATTRIBUTES }
+      ];
+
+      if(req.query.did) {
+        query._depot = req.query.did;
+      }
       // TODO: Build query based on params
       const itemCount = await History.find(query).countDocuments();
 
       const items = await History
         .find(query)
         .select(select)
+        .populate(populateQuery)
         .sort(sort)
         .limit(limit)
         .skip(skip);

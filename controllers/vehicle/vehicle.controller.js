@@ -38,6 +38,10 @@ const VehicleController = {
       const select = WHITELIST_ATTRIBUTES.join(' ');
 
       const query = {};
+      if (req.query.reg) {
+        query.reg = { $regex: `${req.query.reg}.*`, $options: 'i' };
+      }
+
       // TODO: Build query based on params
       const itemCount = await Vehicle.find(query).countDocuments();
 
