@@ -14,8 +14,13 @@ const WHITELIST_ATTRIBUTES = [
 ];
 
 const WHITELIST_REQUEST_ATTRIBUTES = [
-  'name',
-  'address',
+  '_id',
+  '_user',
+  '_depot',
+  '_vehicle',
+  'franchiseId',
+  'routeNo',
+  'stops',
   'postCode'
 ];
 
@@ -51,7 +56,7 @@ const HistoryController = {
         { path: '_vehicle', select: WHITELIST_VEHICLE_ATTRIBUTES }
       ];
 
-      if(req.query.did) {
+      if (req.query.did) {
         query._depot = req.query.did;
       }
       // TODO: Build query based on params

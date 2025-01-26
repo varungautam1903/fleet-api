@@ -10,5 +10,6 @@ router.put('/admin/:id', auth.protect, auth.admin, adminController.update);
 router.patch('/admin/:id', auth.protect, auth.admin, adminController.update);
 
 router.get('/getall', auth.protect, controller.index);
+router.post('/', auth.protect, controller.create);
 
 module.exports = router;
