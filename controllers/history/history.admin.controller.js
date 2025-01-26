@@ -3,10 +3,14 @@ const utils = require('../../components/utils');
 const History = require('./history.model');
 
 const WHITELIST_ATTRIBUTES = [
-  '_id',
-  'name',
-  'address',
-  'postCode'
+  '_user',
+  '_depot',
+  '_vehicle',
+  'routeNo',
+  'routeDate',
+  'postCode',
+  'stops',
+  'franchiseId'
 ];
 
 const WHITELIST_REQUEST_ATTRIBUTES = [
@@ -14,6 +18,7 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
   '_depot',
   '_vehicle',
   'routeNo',
+  'routeDate',
   'postCode',
   'stops',
   'franchiseId'

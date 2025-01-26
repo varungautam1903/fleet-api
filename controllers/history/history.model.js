@@ -4,6 +4,7 @@ const HistorySchema = new mongoose.Schema({
   _user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   _depot: { type: mongoose.Schema.Types.ObjectId, ref: "Depot", required: true },
   _vehicle: { type: mongoose.Schema.Types.ObjectId, ref: "Vehicle", required: true },
+  routeDate: { type: Date, required: true },
   routeNo: { type: String, required: true },
   postCode: { type: String, required: true },
   stops: { type: String, required: true },

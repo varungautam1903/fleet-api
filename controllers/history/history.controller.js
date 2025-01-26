@@ -9,6 +9,7 @@ const WHITELIST_ATTRIBUTES = [
   '_vehicle',
   'franchiseId',
   'routeNo',
+  'routeDate',
   'stops',
   'postCode'
 ];
@@ -20,6 +21,7 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
   '_vehicle',
   'franchiseId',
   'routeNo',
+  'routeDate',
   'stops',
   'postCode'
 ];
