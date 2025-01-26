@@ -24,6 +24,7 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin", "manager", "accountant"],
       default: "user",
     },
+    _depot: { type: mongoose.Schema.Types.ObjectId, ref: "Depot" },
     address: { type: String, required: true },
     postCode: { type: String, required: true },
     dob: { type: String, required: true },
@@ -41,6 +42,7 @@ const UserSchema = new mongoose.Schema(
 // On every save update the display name
 UserSchema.pre("save", function (next) {
   this.displayName = `${this.firstName} ${this.middleName} ${this.lastName}`;
+  this.displayName = this.displayName.replace(/\s+/g, ' ').trim();
   this.userName = `${this.firstName}${this.phoneNo.slice(-4)}`
   next();
 });

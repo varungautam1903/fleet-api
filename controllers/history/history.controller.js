@@ -58,8 +58,8 @@ const HistoryController = {
         { path: '_vehicle', select: WHITELIST_VEHICLE_ATTRIBUTES }
       ];
 
-      if (req.query.did) {
-        query._depot = req.query.did;
+      if (req.user._depot) {
+        query._depot = req.user._depot;
       }
       // TODO: Build query based on params
       const itemCount = await History.find(query).countDocuments();
@@ -83,6 +83,12 @@ const HistoryController = {
    */
   create: async (req, res, next) => {
     try {
+      let item = req.body;
+      if (req.user._depot) {
+        utils.respondWithError({ message: 'You are not auhorized to add History' });
+      }
+
+      item._depot = req.user?._depot;
       const newHistory = utils.sanitizeObject(req.body, WHITELIST_REQUEST_ATTRIBUTES);
       let history = await History.create(newHistory);
       history = history.toObject();

@@ -19,6 +19,7 @@ const WHITELIST_ATTRIBUTES = [
 ];
 
 const WHITELIST_REQUEST_ATTRIBUTES = [
+  'driverId',
   'firstName',
   'middleName',
   'lastName',
@@ -29,7 +30,8 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
   'dob',
   "isActive",
   'phoneNo',
-  'addPhoneNo'
+  'addPhoneNo',
+  'role'
 ];
 
 const UserAdminController = {
