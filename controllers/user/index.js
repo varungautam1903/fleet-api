@@ -7,6 +7,7 @@ const auth = require("../../components/middleware/authMiddleware");
 // Unauthorized
 router.post("/register", controller.register);
 router.post("/login", controller.login);
+router.get("/test", controller.test);
 
 // For Users
 router.get("/", auth.protect, controller.index);

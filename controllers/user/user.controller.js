@@ -41,6 +41,14 @@ const WHITELIST_REQUEST_ATTRIBUTES = [
 
 const UserController = {
 
+  test: async (req, res, next) => {
+    try {
+      res.status(200).json({ message: 'Hello World' });
+    } catch (err) {
+      utils.handleError(next)(err);
+    }
+  },
+
   /**
    * Creates a new user
    */
@@ -149,7 +157,7 @@ const UserController = {
     }
   },
 
-  
+
 
 };
 
